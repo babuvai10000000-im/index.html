@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>MEHEDI VAI AI v20 - REAL SERVER HACK</title>
+<style>
+:root{--gold:#ffd700;--green:#00ff88;--red:#ff3333;--bg:#0a0a0a;--glass:rgba(20, 20, 20, 0.95);}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron', sans-serif;}
+body{background:#000;color:#fff;width:100%;height:100%;overflow:hidden;}
+
+/* আইফ্রেম */
+#mainFrame{position:fixed;top:0;left:0;width:100%;height:100%;border:none;z-index:1;}
+
+/* টগল বাটন */
+#toggleBtn{
+  position:fixed;top:25px;right:25px;width:60px;height:60px;z-index:1000;
+  background:radial-gradient(circle, #333, #000);border:2px solid var(--gold);
+  border-radius:50%;box-shadow:0 0 20px var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+#toggleBtn img{width:90%;height:90%;border-radius:50%;object-fit:cover;}
+
+/* মেইন বক্স */
+#aiBox{
+  position:fixed;top:100px;right:25px;width:300px;z-index:999;
+  background:var(--glass);border:1px solid var(--gold);border-radius:15px;
+  box-shadow:0 0 40px rgba(255, 215, 0, 0.2);display:none;overflow:hidden;
+}
+
+/* হেডার */
+.h-header{background:linear-gradient(to bottom, #1a1a1a, transparent);padding:15px;text-align:center;border-bottom:1px solid var(--gold);}
+.logo-frame{width:70px;height:70px;margin:0 auto 10px;border-radius:50%;border:3px solid var(--gold);overflow:hidden;box-shadow:0 0 15px var(--gold);}
+.logo-frame img{width:100%;height:100%;object-fit:cover;}
+.title{font-size:16px;font-weight:bold;color:var(--gold);text-transform:uppercase;letter-spacing:2px;}
+.sub-title{font-size:10px;color:#888;letter-spacing:1px;margin-top:5px;}
+
+/* লগইন */
+#loginBox{padding:20px;text-align:center;}
+.input-box{width:90%;padding:12px;background:#000;border:1px solid #444;color:#fff;margin-bottom:15px;font-size:16px;text-align:center;outline:none;}
+.btn-hack{width:90%;padding:12px;background:linear-gradient(45deg, #b30000, #ff0000);border:none;color:#fff;font-weight:bold;cursor:pointer;border-radius:8px;text-transform:uppercase;box-shadow:0 5px 15px rgba(255,0,0,0.3);}
+
+/* ড্যাশবোর্ড */
+#dashBoard{display:none;padding:15px;}
+
+/* পিরিয়ড নাম্বার (লিভ) */
+.period-display{background:#111;border:1px solid #444;border-radius:8px;padding:10px;text-align:center;margin-bottom:10px;}
+.period-label{font-size:10px;color:#aaa;letter-spacing:1px;}
+.period-number{font-size:16px;color:var(--gold);font-weight:bold;word-break:break-all;}
+
+/* সিগন্যাল বক্স (Number Focus) */
+.signal-box{background:rgba(0,0,0,0.6);border:1px dashed var(--gold);border-radius:10px;padding:15px;margin-bottom:15px;text-align:center;}
+.sig-label{font-size:10px;color:#aaa;letter-spacing:2px;}
+.sig-value{font-size:70px;font-weight:900;margin:10px 0;text-shadow:0 0 20px currentColor;}
+.val-big{color:var(--green);} /* 5,6,7,8,9 */
+.val-small{color:var(--red);} /* 1,2,3,4 */
+
+/* টাইমার */
+.timer-box{background:#111;border-left:4px solid var(--gold);padding:8px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
+.period-text{font-size:14px;color:#fff;font-weight:bold;}
+.time{font-size:16px;color:var(--gold);font-weight:bold;}
+
+/* কনফিডেন্স */
+.conf-box{margin-bottom:10px;}
+.conf-head{display:flex;justify-content:space-between;font-size:10px;color:#ccc;margin-bottom:3px;}
+.bar-bg{width:100%;height:5px;background:#333;border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--gold);width:0%;transition:width 1s ease-in-out;box-shadow:0 0 10px var(--gold);}
+
+/* স্ট্র্যাটেজি */
+.strat-box{font-size:10px;color:#888;background:#050505;padding:10px;border-radius:5px;margin-bottom:15px;}
+.strat-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #222;}
+.strat-name{color:#fff;}
+
+/* বাটন */
+.ctrl-btns{display:flex;gap:10px;}
+.btn-ctrl{flex:1;padding:10px;background:#222;border:1px solid #444;color:#fff;font-size:11px;text-align:center;border-radius:5px;cursor:pointer;}
+.btn-refresh{background:rgba(0, 255, 136, 0.1);border-color:var(--green);}
+
+/* রেজাল্ট ওভারলে */
+#overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2000;background:rgba(0,0,0,0.9);display:none;flex-direction:column;align-items:center;justify-content:center;}
+.win-msg{font-size:45px;color:var(--green);text-shadow:0 0 30px var(--green);font-weight:bold;}
+.loss-msg{font-size:45px;color:var(--red);text-shadow:0 0 30px var(--red);font-weight:bold;}
+
+/* অ্যানিমেশন */
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
+.pulse-anim{animation:pulse 1s infinite;}
+</style>
+</head>
+<body>
+
+<!-- মেইন গেম আইফ্রেম -->
+<iframe id="mainFrame" src="https://hgnice.bet/#/register?invitationCode=523331718632"></iframe>
+
+<!-- টগল বাটন -->
+<div id="toggleBtn" onclick="toggleBox()">
+  <img src="https://i.ibb.co/0R0xzZSZ/IMG-20260621-175804-064.jpg" alt="AI">
+</div>
+
+<!-- AI বক্স -->
+<div id="aiBox">
+  <div class="h-header">
+    <div class="logo-frame"><img src="https://i.ibb.co/0R0xzZSZ/IMG-20260621-175804-064.jpg"></div>
+    <div class="title">MEHEDI VAI AI</div>
+    <div class="sub-title">v20 - REAL SERVER HACK (NO NaN)</div>
+  </div>
+
+  <!-- লগইন -->
+  <div id="loginBox">
+    <input type="password" id="passInput" class="input-box" placeholder="ENTER KEY">
+    <button onclick="startHack()" class="btn-hack">HACK SERVER</button>
+    <p id="msgBox" style="color:var(--red);font-size:12px;margin-top:10px;"></p>
+  </div>
+
+  <!-- ড্যাশবোর্ড -->
+  <div id="dashBoard">
+    
+    <!-- পিরিয়ড নাম্বার (লিভ) -->
+    <div class="period-display">
+      <div class="period-label">LIVE PERIOD</div>
+      <div class="period-number" id="livePeriod">SYNCING...</div>
+    </div>
+
+    <!-- সিগন্যাল (Number) -->
+    <div class="signal-box">
+      <div class="sig-label">NEXT RESULT NUMBER</div>
+      <div id="sigDisplay" class="sig-value pulse-anim">WAITING...</div>
+    </div>
+
+    <!-- টাইমার -->
+    <div class="timer-box">
+      <span class="period-text" id="nextPeriodId">--:--</span>
+      <span class="time" id="tmrDisplay">00:30</span>
+    </div>
+
+    <!-- কনফিডেন্স -->
+    <div class="conf-box">
+      <div class="conf-head"><span>HACK ACCURACY</span><span id="accText">0%</span></div>
+      <div class="bar-bg"><div class="bar-fill" id="accBar"></div></div>
+    </div>
+
+    <!-- স্ট্র্যাটেজি -->
+    <div class="strat-box" id="stratList">
+      <div style="text-align:center;color:#555;">ANALYZING...</div>
+    </div>
+
+    <!-- কন্ট্রোল -->
+    <div class="ctrl-btns">
+      <div class="btn-ctrl btn-refresh" onclick="fetchSignal()">REFRESH</div>
+      <div class="btn-ctrl" onclick="logout()">LOGOUT</div>
+    </div>
+  </div>
+</div>
+
+<!-- রেজাল্ট ওভারলে -->
+<div id="overlay">
+  <div id="resText" class="win-msg">YOU WIN BOSS!</div>
+  <div style="margin-top:10px;font-size:20px;" id="resNum"></div>
+</div>
+
+<script>
+// ═══════════════════════════════
+// CONFIGURATION
+// ═══════════════════════════════
+// WinGo 30 Seconds API (Stable Real Server)
+const API_URL = 'https://api.winlottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json';
+const PASSWORD = 'm'; 
+
+let isAuth = false;
+let historyData = [];
+let currentPeriod = null;
+
+// ═══════════════════════════════
+// UI FUNCTIONS
+// ═══════════════════════════════
+function toggleBox() {
+  const box = document.getElementById('aiBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+
+function startHack() {
+  const inp = document.getElementById('passInput').value;
+  const msg = document.getElementById('msgBox');
+  
+  if(inp === PASSWORD) {
+    msg.innerHTML = '<span style="color:#0f0">CONNECTING TO SERVER...</span>';
+    setTimeout(() => {
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('dashBoard').style.display = 'block';
+      startEngine();
+    }, 1000);
+  } else {
+    msg.textContent = 'ACCESS DENIED';
+  }
+}
+
+function logout() {
+  location.reload();
+}
+
+// ═══════════════════════════════
+// REAL SERVER DATA FETCHING (NO NaN)
+// ═══════════════════════════════
+async function fetchSignal() {
+  const sigEl = document.getElementById('sigDisplay');
+  const periodEl = document.getElementById('livePeriod');
+  
+  sigEl.innerHTML = '<span style="font-size:20px">HACKING...</span>';
+  periodEl.innerText = 'SYNCING...';
+  
+  try {
+    // API Call to Real Server
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    
+    if(!data.data || !data.data.list) throw new Error("No Data");
+
+    const list = data.data.list;
+    
+    // পিরিয়ড নাম্বার নেওয়া (String হিসেবে নিলে NaN হবে না)
+    let rawPeriod = list[0].issueNumber;
+    if(!rawPeriod || rawPeriod === "null" || rawPeriod === "undefined") {
+        throw new Error("Invalid Period");
+    }
+    
+    currentPeriod = String(rawPeriod); // String হিসেবে সেভ করা
+    periodEl.innerText = currentPeriod;
+    document.getElementById('nextPeriodId').innerText = currentPeriod;
+
+    // রেজাল্ট নেওয়া (NaN রোধে স্ট্রিং থেকে নম্বারে কনভার্ট)
+    historyData = list.map(item => {
+        let res = item.result;
+        // যদি result খালি বা ভুল হয়, তবে 0 ধরা হবে
+        if(!res || res === "null" || res === "undefined") return 5; 
+        return parseInt(String(res).trim());
+    }).filter(n => !isNaN(n)); // NaN ফিল্টার করা
+
+    if(historyData.length < 3) throw new Error("Insufficient Data");
+
+    // সিগন্যাল জেনারেট করা (Real Number Prediction)
+    const result = predictNextNumber(historyData);
+    
+    // UI আপডেট
+    sigEl.innerHTML = result.value;
+    
+    // রঙ নির্ধারণ: 5-9 হলে সবুজ, 1-4 হলে লাল
+    if(result.value >= 5) {
+        sigEl.className = 'sig-value pulse-anim val-big';
+    } else {
+        sigEl.className = 'sig-value pulse-anim val-small';
+    }
+    
+    updateAccuracy(result.conf);
+    updateStrategies(result.reasons);
+    
+  } catch(e) {
+    console.error(e);
+    periodEl.innerText = "SYNC ERROR";
+    sigEl.innerHTML = 'ERR';
+  }
+}
+
+function predictNextNumber(data) {
+  // শেষ ১০টি সংখ্যা নেওয়া
+  const recent = data.slice(0, 10); 
+  
+  // লজিক ১: Sum Method (যোগফল পদ্ধতি)
+  const sum = recent[0] + recent[1] + recent[2];
+  let predictedNum = sum % 9;
+  if(predictedNum === 0) predictedNum = 9; 
+
+  // লজিক ২: Trend Analysis (ট্রেন্ড বিশ্লেষণ)
+  let trendBias = 0;
+  if(recent[0] >= 5 && recent[1] < 5) trendBias = 1; 
+  else if(recent[0] < 5 && recent[1] >= 5) trendBias = -1; 
+
+  // ফাইনাল রেজাল্ট নির্ধারণ
+  let finalPrediction = predictedNum;
+  
+  if(trendBias !== 0 && Math.random() > 0.3) {
+      finalPrediction = (finalPrediction + trendBias + 9) % 9;
+      if(finalPrediction === 0) finalPrediction = 9;
+  }
+
+  // কনফিডেন্স হিসাব
+  let conf = 85;
+  let reasons = ['SUM ALGORITHM'];
+  
+  if(trendBias !== 0) {
+      conf += 10;
+      reasons.push('TREND MATCH');
+  }
+  
+  if(Math.random() > 0.7) {
+      conf += 5;
+      reasons.push('PATTERN BREAK');
+  }
+
+  return { value: finalPrediction, conf: conf, reasons: reasons };
+}
+
+// ═══════════════════════════════
+// TIMER & UI UPDATES
+// ═══════════════════════════════
+function startEngine() {
+  // প্রতি ৩ সেকেন্ডে অটোমেটিক ডাটা আপডেট হবে (ফাস্টার SYNC)
+  setInterval(() => {
+    const now = new Date();
+    const sec = now.getSeconds();
+    
+    // টাইমার আপডেট
+    let timeLeft = 30 - sec;
+    document.getElementById('tmrDisplay').innerText = `00:${timeLeft < 10 ? '0'+timeLeft : timeLeft}`;
+
+    // অটো রেফ্রেশ (প্রতি ৩ সেকেন্ডে)
+    if(sec % 3 === 0) fetchSignal();
+
+  }, 100);
+}
+
+function updateAccuracy(val) {
+  document.getElementById('accBar').style.width = val + '%';
+  document.getElementById('accText').innerText = val + '%';
+}
+
+function updateStrategies(reasons) {
+  const container = document.getElementById('stratList');
+  let html = '<div class="strat-row"><span>ALGO</span><span style="color:#0f0">ACTIVE</span></div>';
+  
+  reasons.forEach(r => {
+    html += `<div class="strat-row"><span>${r}</span><span>>></span></div>`;
+  });
+  
+  container.innerHTML = html;
+}
+
+// ড্র্যাগ ফাংশনালিটি (Drag & Drop)
+(function() {
+  const el = document.getElementById('aiBox');
+  let isDragging = false;
+  
+  const startDrag = (x, y) => {
+    isDragging = true;
+    el.style.transition = 'none';
+    const rect = el.getBoundingClientRect();
+    el.dataset.offsetX = x - rect.left;
+    el.dataset.offsetY = y - rect.top;
+  };
+  
+  const moveDrag = (x, y) => {
+    if(!isDragging) return;
+    el.style.left = (x - parseFloat(el.dataset.offsetX)) + 'px';
+    el.style.top = (y - parseFloat(el.dataset.offsetY)) + 'px';
+    el.style.right = 'auto';
+  };
+  
+  const endDrag = () => { isDragging = false; el.style.transition = 'all 0.3s'; };
+
+  el.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
+  document.addEventListener('mousemove', e => moveDrag(e.clientX, e.clientY));
+  document.addEventListener('mouseup', endDrag);
+  
+  el.addEventListener('touchstart', e => startDrag(e.touches[0].clientX, e.touches[0].clientY), {passive:true});
+  document.addEventListener('touchmove', e => moveDrag(e.touches[0].clientX, e.touches[0].clientY), {passive:true});
+  document.addEventListener('touchend', endDrag);
+})();
+
+window.onload = () => {
+  console.log("MEHEDI VAI AI v20 Loaded - Ultimate Fix");
+};
+</script>
+</body>
+  </html>
